@@ -22,9 +22,9 @@ pip install google-cloud-storage
 
 ---
 
-## Script: `upload_yellow_tripdata.py`
+## Script: `ingest.py`
 
-This Python script downloads Yellow Taxi trip data for the first 6 months of 2024, uploads it to a GCS bucket, and verifies the upload.
+This Python script downloads Yellow Taxi trip data for the first 6 months of 2024, uploads it to a GCS bucket, and verifies the upload. The script was part of the resources provided.
 
 ### Key Features
 

@@ -37,7 +37,7 @@ This Python script downloads Yellow Taxi trip data for the first 6 months of 202
 ### Usage
 
 ```bash
-python upload_yellow_tripdata.py
+uv run ingest.py
 ```
 
 ### Configuration
@@ -51,7 +51,7 @@ python upload_yellow_tripdata.py
 
 ## BigQuery Steps
 
-### 1. Create External Table
+### 1a. Create External Table
 
 ```sql
 CREATE OR REPLACE EXTERNAL TABLE `big-query-prj-486915.yellow_taxi_trip.external_yellow_trip_records`
@@ -66,7 +66,7 @@ OPTIONS (
 
 ---
 
-### 2. Create Materialized/Regular Table
+### 1a. Create Materialized/Regular Table
 
 ```sql
 CREATE OR REPLACE TABLE big-query-prj-486915.yellow_taxi_trip.regular_yellow_trip_records AS
@@ -78,7 +78,7 @@ SELECT * FROM big-query-prj-486915.yellow_taxi_trip.external_yellow_trip_records
 
 ---
 
-### 3. Sample Queries
+### 2. Sample Queries
 
 **Count all records in 2024 dataset:**
 
@@ -124,7 +124,7 @@ WHERE fare_amount = 0;
 
 ---
 
-### 4. Partitioned and Clustered Table
+### 5. Partitioned and Clustered Table
 
 ```sql
 CREATE OR REPLACE TABLE big-query-prj-486915.yellow_taxi_trip.yellow_trip_records_partitioned
@@ -151,12 +151,11 @@ FROM big-query-prj-486915.yellow_taxi_trip.yellow_trip_records_partitioned
 WHERE tpep_dropoff_datetime BETWEEN '2024-03-01' AND '2024-03-15';
 ```
 
-* Partitioned table scans fewer bytes → faster and cheaper queries.
+* Regular table: This query will process 310.24 MB when run.
+* Partitioned table - This query will process 26.84 MB when run.
 
 ---
 
-## Notes
+Quest 9.
 
-* Always verify GCS uploads to ensure data integrity.
-* Use **external tables** for occasional queries to save storage costs.
-* Use **partitioned and clustered tables** for large datasets to improve query efficiency.
+Tjhe bigquey will no use 0 byte because the count is stored in the as part of the metadata and it is not selecting any columns

@@ -158,4 +158,4 @@ WHERE tpep_dropoff_datetime BETWEEN '2024-03-01' AND '2024-03-15';
 
 Quest 9.
 
-Tjhe bigquey will no use 0 byte because the count is stored in the as part of the metadata and it is not selecting any columns
+The bigquey will use 0 byte because the count is stored in the as part of the metadata and it is not selecting any columns.
